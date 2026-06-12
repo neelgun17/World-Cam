@@ -99,3 +99,4 @@ Built for Vercel (`vercel deploy`). The cam proxy should set
 `Cache-Control: public, s-maxage=2, stale-while-revalidate=4` so the edge cache
 makes upstream load independent of viewer count; `/api/matches` likewise with
 `s-maxage=60` to stay polite to ESPN.
+# World-Cam
