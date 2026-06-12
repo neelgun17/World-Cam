@@ -24,7 +24,7 @@ components/                   ← CamGrid, CamTile, ScoreBar, MatchDayBanner
 
 ## Live venues
 
-8 host cities have verified, working cameras:
+9 host cities have verified, working cameras:
 
 | Venue | Cams | Source |
 |---|---|---|
@@ -36,17 +36,27 @@ components/                   ← CamGrid, CamTile, ScoreBar, MatchDayBanner
 | SoFi Stadium (LA) | I-105 @ Prairie, I-405 @ Century | Caltrans D7 |
 | Levi's Stadium (Bay Area) | SR-237 @ Lafayette & North First | Caltrans D4 |
 | Lumen Field (Seattle) | I-5 @ Dearborn & Judkins | WSDOT |
+| NRG Stadium (Houston) | I-610 South Loop @ Kirby & Fannin | Houston TranStar |
 
 Notes on the gaps:
-- **NY/NJ**: every NJ-side source (511NJ, NJ Turnpike) is HLS video only, so the
-  cams watch Penn Station — where fans board NJ Transit to MetLife. An
-  untokened NJTA HLS stream adjacent to the stadium is noted in `lib/venues.ts`
-  if HLS support is ever added.
+- **NY/NJ**: every NJ-side *still* source is unavailable, so the JPEG cams watch
+  Penn Station — where fans board NJ Transit to MetLife. The NJTA Turnpike
+  MM 112.3 cam adjacent to the stadium is now live as an `hls` feed.
 - **Boston**: skipped — MassDOT's snapshot host serves "temporarily
   unavailable" placeholders statewide. Candidate URLs (I-95 @ Exit 17, Sharon):
   `https://public.carsprogram.org/cameras/MA/435513-fullJpeg.jpg` and
   `.../435512-fullJpeg.jpg` — retest later, they may recover.
-- **Dallas / Houston / Kansas City**: not yet harvested.
+- **Dallas** (AT&T Stadium, Arlington — TxDOT Fort Worth district): no
+  hotlinkable still. TxDOT's current ITS (`its.txdot.gov/its/District/FTW`)
+  delivers CCTV snapshots over a SignalR/msgpack hub + a REST API
+  (`DistrictIts/GetCctvSnapshotByIcdId`) that returns image *data* keyed by
+  `icd_Id`, not a static JPEG URL — so it can't be hotlinked or proxied as-is.
+  Revisit if the proxy learns to call that endpoint and re-emit the bytes.
+- **Kansas City** (GEHA Field at Arrowhead — KC Scout / MoDOT): cameras are
+  tokenized Wowza HLS (`<wowza>/<app>/<file>/playlist.m3u8?<token>`) where the
+  token is minted per session, so there's no stable URL to embed. MoDOT's
+  still-image "Improve I-70" cams (`modot.org/improvei70kc/live-cameras`) sit
+  downtown (Prospect–31st), not out at the I-70/I-435 Truman Sports Complex.
 
 ## Data sources
 
@@ -83,9 +93,10 @@ Each event includes `competitions[0].venue.fullName`, which is matched against
 Prefer JPEG-still cams. For real video, `kind: "embed"` renders the sourceUrl
 in an iframe — used for 24/7 YouTube live streams, embedded by channel id
 (`/embed/live_stream?channel=...`) so links survive stream restarts. If a
-source only offers HLS video (`.m3u8`), set `kind: "hls"` and add
-[hls.js](https://github.com/video-dev/hls.js) to CamTile — deliberately not
-installed yet.
+source only offers HLS video (`.m3u8`), set `kind: "hls"` (`proxy: false`):
+CamTile plays it via [hls.js](https://github.com/video-dev/hls.js), lazy-loaded
+on the client only when an HLS tile mounts (Safari/iOS use native HLS). The
+MetLife NJTA Turnpike cam is the first HLS feed.
 
 ## Adding a new host city
 

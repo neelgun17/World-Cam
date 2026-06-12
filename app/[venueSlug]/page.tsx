@@ -1,7 +1,9 @@
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import CamGrid from "@/components/CamGrid";
 import LivePanel from "@/components/LivePanel";
+import { accentVar } from "@/lib/palette";
 import { getAllVenues, getVenue } from "@/lib/venues";
 
 /** One venue's fan-cam page. Works for any registry entry — no per-city pages. */
@@ -13,6 +15,10 @@ export default async function VenuePage({
   const { venueSlug } = await params;
   const venue = getVenue(venueSlug);
   if (!venue) notFound();
+
+  const accent = accentVar(
+    getAllVenues().findIndex((v) => v.slug === venue.slug)
+  );
 
   return (
     <>
@@ -36,6 +42,22 @@ export default async function VenuePage({
       </header>
 
       <main className="mx-auto w-full max-w-6xl flex-1 px-6 py-8">
+        <figure
+          className="mb-6 overflow-hidden shadow-block"
+          style={{ border: `6px solid ${accent}` }}
+        >
+          <div className="relative aspect-[2/1] w-full bg-paper">
+            <Image
+              src={`/stadiums/${venue.slug}.webp`}
+              alt={`Retro illustration of ${venue.name}`}
+              fill
+              sizes="(max-width: 1200px) 100vw, 1152px"
+              className="object-cover"
+              preload
+            />
+          </div>
+        </figure>
+
         <div className="space-y-6">
           <LivePanel venue={venue} />
           <CamGrid cameras={venue.cameras} />

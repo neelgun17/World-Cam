@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { getAllVenues } from "@/lib/venues";
 import { accentVar, ACCENT_TOKENS } from "@/lib/palette";
@@ -54,12 +55,23 @@ export default function Home() {
               <li key={venue.slug}>
                 <Link
                   href={`/${venue.slug}`}
-                  className="block bg-paper p-1.5 shadow-block-sm transition-transform hover:-translate-y-0.5"
+                  className="block overflow-hidden bg-paper shadow-block-sm transition-transform hover:-translate-y-0.5"
                   style={{ border: `5px solid ${accent}` }}
                 >
+                  <div className="relative aspect-[2/1] w-full bg-paper">
+                    <Image
+                      src={`/stadiums/${venue.slug}.webp`}
+                      alt={`Retro illustration of ${venue.name}`}
+                      fill
+                      sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                      className="object-cover"
+                    />
+                  </div>
                   <div
-                    className="h-full px-3 py-4"
-                    style={{ background: `color-mix(in srgb, ${accent} 12%, transparent)` }}
+                    className="px-3 py-3"
+                    style={{
+                      background: `color-mix(in srgb, ${accent} 14%, var(--color-paper))`,
+                    }}
                   >
                     <span
                       className="text-xs font-bold uppercase tracking-[0.2em]"

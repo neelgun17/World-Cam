@@ -16,11 +16,21 @@ export const VENUES: Venue[] = [
     timezone: "America/New_York",
     espnVenueNames: ["MetLife"],
     // NJ-side sources (511NJ, NJ Turnpike) are HLS video only — no public
-    // JPEG stills. These NYC DOT cams cover Penn Station, where fans board
-    // NJ Transit to the stadium. If HLS support lands, the NJTA cam at
-    // Turnpike MM 112.3 (adjacent to MetLife) is:
-    // https://wink.njta.com/204/public/hls/WF05-24B0-46EE-1F2E-1932_nj.m3u8
+    // JPEG stills. The NJTA cam at Turnpike MM 112.3 sits adjacent to the
+    // stadium and now plays via kind:"hls". The NYC DOT stills below cover
+    // Penn Station, where fans board NJ Transit to MetLife.
     cameras: [
+      {
+        id: "metlife-njta-mm1123",
+        name: "NJ Turnpike @ MM 112.3 (live video)",
+        location: "NJ Turnpike mile marker 112.3 — adjacent to MetLife Stadium, East Rutherford, NJ",
+        // HLS streams reference relative segments, so they're played directly
+        // client-side (hls.js) rather than through the JPEG image proxy.
+        sourceUrl: "https://wink.njta.com/204/public/hls/WF05-24B0-46EE-1F2E-1932_nj.m3u8",
+        kind: "hls",
+        proxy: false,
+        attribution: "NJTA / 511NJ",
+      },
       {
         id: "metlife-8th-ave-33rd-st",
         name: "8th Ave @ 33rd St",
@@ -312,6 +322,43 @@ export const VENUES: Venue[] = [
         proxy: true,
         refreshMs: 60_000,
         attribution: "WSDOT",
+      },
+    ],
+  },
+  {
+    slug: "houston",
+    name: "NRG Stadium",
+    city: "Houston, TX",
+    timezone: "America/Chicago",
+    espnVenueNames: ["NRG"],
+    // Houston TranStar snapshots: the camera registry lives in
+    // /data/layers/cctvSnapshots_out.js and stills are at
+    // https://www.houstontranstar.org/snapshots/cctv/<id>.jpg . NRG Park is
+    // boxed in by the I-610 South Loop to the south, Kirby Dr (west) and
+    // Fannin St (east) — these two cams flank the stadium on the fan-approach
+    // freeway. (Dallas / Kansas City are still unharvested — see README: TxDOT's
+    // ITS serves snapshots over SignalR not static JPEGs, and KC Scout is
+    // tokened Wowza HLS, so neither has a hotlinkable still URL yet.)
+    cameras: [
+      {
+        id: "houston-610-kirby",
+        name: "I-610 South Loop @ Kirby Dr",
+        location: "I-610 South Loop at Kirby Dr — NRG Stadium's west side, Houston, TX",
+        sourceUrl: "https://www.houstontranstar.org/snapshots/cctv/633.jpg",
+        kind: "jpeg",
+        proxy: true,
+        refreshMs: 60_000,
+        attribution: "Houston TranStar",
+      },
+      {
+        id: "houston-610-fannin",
+        name: "I-610 South Loop @ Fannin St",
+        location: "I-610 South Loop at Fannin St — NRG Stadium's east side, Houston, TX",
+        sourceUrl: "https://www.houstontranstar.org/snapshots/cctv/634.jpg",
+        kind: "jpeg",
+        proxy: true,
+        refreshMs: 60_000,
+        attribution: "Houston TranStar",
       },
     ],
   },

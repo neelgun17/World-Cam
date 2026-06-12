@@ -6,6 +6,64 @@ import type { Camera } from "@/lib/types";
 const MAX_FAILURES = 3;
 
 /**
+ * Plays an HLS (.m3u8) live stream. Safari/iOS play HLS natively, so we just
+ * point the <video> at the playlist; everywhere else we lazy-load hls.js the
+ * first time an HLS tile mounts (dynamic import keeps it out of the main bundle
+ * — see node_modules/next/dist/docs/01-app/02-guides/lazy-loading.md). A fatal
+ * stream error swaps in a "stream offline" panel rather than a frozen frame.
+ */
+function HlsVideo({ src, className }: { src: string; className: string }) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [offline, setOffline] = useState(false);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    setOffline(false);
+
+    if (video.canPlayType("application/vnd.apple.mpegurl")) {
+      video.src = src; // native HLS (Safari / iOS)
+      return;
+    }
+
+    let destroyed = false;
+    let hls: import("hls.js").default | null = null;
+    import("hls.js").then(({ default: Hls }) => {
+      if (destroyed) return;
+      if (!Hls.isSupported()) {
+        setOffline(true);
+        return;
+      }
+      hls = new Hls({ liveSyncDurationCount: 3 });
+      hls.on(Hls.Events.ERROR, (_evt, data) => {
+        if (data.fatal) setOffline(true);
+      });
+      hls.loadSource(src);
+      hls.attachMedia(video);
+    });
+
+    return () => {
+      destroyed = true;
+      hls?.destroy();
+    };
+  }, [src]);
+
+  if (offline) {
+    return (
+      <div
+        className={`flex items-center justify-center bg-black text-sm uppercase tracking-[0.25em] text-paper/40 ${className}`}
+      >
+        stream offline
+      </div>
+    );
+  }
+
+  return (
+    <video ref={videoRef} className={className} autoPlay muted playsInline />
+  );
+}
+
+/**
  * One camera feed.
  * - "jpeg": polls a fresh frame every `refreshMs`, preloading each frame
  *   off-screen and swapping only on load so the tile never goes blank. After
@@ -13,6 +71,7 @@ const MAX_FAILURES = 3;
  *   retrying — public DOT cams drop out and recover all the time.
  * - "embed": renders the sourceUrl in an iframe (muted autoplay), e.g. a
  *   YouTube live stream.
+ * - "hls": plays an .m3u8 stream via <HlsVideo> (e.g. an untokened 511 feed).
  * Tiles enlarge into a lightbox (Escape or backdrop click to close); jpeg
  * tiles enlarge on click, embeds via the caption button since the iframe
  * swallows clicks.
@@ -32,13 +91,16 @@ export default function CamTile({
   const base = camera.proxy ? `/api/cam/${camera.id}` : camera.sourceUrl;
   const pollMs = camera.refreshMs ?? refreshMs;
   const isEmbed = camera.kind === "embed";
+  const isHls = camera.kind === "hls";
+  // embed + hls are both autoplaying video; jpeg is the polled-still path.
+  const isLiveVideo = isEmbed || isHls;
   const [src, setSrc] = useState<string | null>(null);
   const [buggy, setBuggy] = useState(false);
   const [enlarged, setEnlarged] = useState(false);
   const failures = useRef(0);
 
   useEffect(() => {
-    if (isEmbed) return;
+    if (isLiveVideo) return;
     let active = true;
     const sep = base.includes("?") ? "&" : "?";
 
@@ -68,7 +130,7 @@ export default function CamTile({
       active = false;
       clearInterval(id);
     };
-  }, [base, pollMs, isEmbed]);
+  }, [base, pollMs, isLiveVideo]);
 
   useEffect(() => {
     if (!enlarged) return;
@@ -79,7 +141,7 @@ export default function CamTile({
     return () => window.removeEventListener("keydown", onKey);
   }, [enlarged]);
 
-  const cadence = isEmbed
+  const cadence = isLiveVideo
     ? "live video"
     : pollMs >= 1000
       ? `still · ${Math.round(pollMs / 1000)}s`
@@ -99,6 +161,15 @@ export default function CamTile({
     />
   );
 
+  // The autoplaying-video media (embed → iframe, hls → <video>), shared by the
+  // tile and the lightbox.
+  const renderLiveMedia = (className: string) =>
+    isEmbed ? (
+      renderEmbed(className)
+    ) : (
+      <HlsVideo src={camera.sourceUrl} className={className} />
+    );
+
   // Shared "● LIVE" bug pinned to the top-left of the media area.
   const liveBug = (
     <span className="pointer-events-none absolute left-0 top-3 z-10 flex items-center gap-1.5 bg-flag-red py-1 pl-2 pr-3 text-[11px] font-bold uppercase tracking-[0.2em] text-paper">
@@ -112,11 +183,11 @@ export default function CamTile({
       className="overflow-hidden bg-ink shadow-block"
       style={{ border: `6px solid ${accent}` }}
     >
-      {isEmbed ? (
+      {isLiveVideo ? (
         <div className="relative aspect-video bg-black">
           {liveBug}
           {/* unmount the tile player while enlarged so two streams don't run */}
-          {!enlarged && renderEmbed("h-full w-full")}
+          {!enlarged && renderLiveMedia("h-full w-full object-cover")}
         </div>
       ) : (
         <button
@@ -151,7 +222,7 @@ export default function CamTile({
         </p>
         <div className="mt-0.5 flex items-baseline justify-between gap-2 text-[11px] uppercase tracking-wide text-paper/80">
           <span>{camera.location}</span>
-          {isEmbed ? (
+          {isLiveVideo ? (
             <button
               type="button"
               onClick={() => setEnlarged(true)}
@@ -173,13 +244,13 @@ export default function CamTile({
           aria-modal="true"
           aria-label={camera.name}
         >
-          {isEmbed ? (
+          {isLiveVideo ? (
             <div
               className="aspect-video w-full max-w-6xl cursor-default"
               onClick={(e) => e.stopPropagation()}
               style={{ border: `6px solid ${accent}` }}
             >
-              {renderEmbed("h-full w-full")}
+              {renderLiveMedia("h-full w-full object-contain")}
             </div>
           ) : (
             src && (
