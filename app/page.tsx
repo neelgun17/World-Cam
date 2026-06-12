@@ -1,65 +1,95 @@
-import Image from "next/image";
+import Link from "next/link";
+import { getAllVenues } from "@/lib/venues";
+import { accentVar, ACCENT_TOKENS } from "@/lib/palette";
 
+/** Venue index — every entry in lib/venues.ts shows up here automatically. */
 export default function Home() {
+  const venues = getAllVenues();
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
+    <>
+      <header className="relative overflow-hidden bg-tangerine">
+        <div aria-hidden className="sunrays absolute inset-0 opacity-[0.18]" />
+        <div className="relative mx-auto max-w-6xl px-6 py-12 sm:py-16">
+          <p className="text-sm font-semibold uppercase tracking-[0.35em] text-paper">
+            ⚽ World Cup 2026 · Fan Cam
+          </p>
+          <h1 className="mt-3 font-display text-6xl uppercase leading-[0.82] tracking-tight sm:text-8xl">
+            <span className="block text-paper">World Cup</span>
+            <span className="block text-navy">
+              Fan Cam <span className="text-mustard">&apos;26</span>
+            </span>
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
+          <p className="mt-4 max-w-xl text-lg uppercase tracking-wide text-paper">
+            Watch the hype build outside every host stadium through public street
+            cams — grainy, live, and gloriously low-res. Inspired by{" "}
             <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+              href="https://gardencam.wttdotm.com/"
+              className="underline decoration-2 underline-offset-2"
             >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+              GardenCam
+            </a>
+            .
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
+        <div className="flex h-3">
+          {ACCENT_TOKENS.map((token) => (
+            <div
+              key={token}
+              className="flex-1"
+              style={{ background: `var(${token})` }}
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+          ))}
         </div>
+      </header>
+
+      <main className="mx-auto w-full max-w-6xl flex-1 px-6 py-12">
+        <h2 className="mb-6 font-display text-3xl uppercase tracking-tight sm:text-4xl">
+          {venues.length} Host Cities
+        </h2>
+        <ul className="grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-4">
+          {venues.map((venue, i) => {
+            const accent = accentVar(i);
+            return (
+              <li key={venue.slug}>
+                <Link
+                  href={`/${venue.slug}`}
+                  className="block bg-paper p-1.5 shadow-block-sm transition-transform hover:-translate-y-0.5"
+                  style={{ border: `5px solid ${accent}` }}
+                >
+                  <div
+                    className="h-full px-3 py-4"
+                    style={{ background: `color-mix(in srgb, ${accent} 12%, transparent)` }}
+                  >
+                    <span
+                      className="text-xs font-bold uppercase tracking-[0.2em]"
+                      style={{ color: accent }}
+                    >
+                      {venue.cameras.length} cams
+                    </span>
+                    <h3 className="mt-1 font-display text-xl uppercase leading-none tracking-tight text-ink">
+                      {venue.name}
+                    </h3>
+                    <p className="mt-1.5 text-sm uppercase tracking-wide text-ink/70">
+                      {venue.city}
+                    </p>
+                  </div>
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
       </main>
-    </div>
+
+      <footer className="border-t-4 border-ink bg-tangerine px-6 py-6">
+        <p className="mx-auto max-w-6xl text-sm uppercase tracking-wide text-paper">
+          Feeds courtesy of public DOT cams · cams can be buggy · inspired by{" "}
+          <a href="https://gardencam.wttdotm.com/" className="underline">
+            GardenCam
+          </a>{" "}
+          by @wttdotm.
+        </p>
+      </footer>
+    </>
   );
 }

@@ -1,0 +1,166 @@
+best camera locations for all of the United States host cities 
+NEW_YORK
+Times Square
+https://www.earthcam.com/usa/newyork/timessquare/
+Primary fan gathering location
+Potential FIFA Fan Festival overflow
+
+LOS_ANGELES
+Santa Monica Pier
+https://pacpark.com/santa-monica-pier-live-cams/
+Beach crowds
+Tourist hotspot
+Celebration potential
+
+MIAMI
+Bayfront Park
+https://www.miamiandbeaches.com/plan-your-trip/miami-webcams
+Official Fan Festival area
+Downtown skyline backdrop
+
+SAN_FRANCISCO
+Golden Gate Bridge / Crissy Field
+https://www.parksconservancy.org/parks/golden-gate-bridge-live-webcams
+International tourist traffic
+Potential watch party area
+
+SEATTLE
+Pike Place Market
+https://www.seattlesouthside.com/plan-your-trip/webcams/
+Pedestrian traffic
+Tourist destination
+
+HOUSTON
+Downtown Houston
+https://www.skylinewebcams.com/en/webcam/united-states/texas/houston/houston-downtown.html
+Close to Fan Festival activity
+Good skyline shot
+
+DALLAS
+Reunion Tower
+https://www.earthcam.com/usa/texas/dallas/reuniontower/
+Best city skyline view
+Likely celebration visibility
+
+KANSAS_CITY
+National WWI Museum & Memorial
+https://www.earthcam.com/usa/missouri/kansascity/
+Official Fan Festival location
+Probably the single best World Cup camera in the Midwest
+
+PHILADELPHIA
+Ben Franklin Parkway
+https://www.earthcam.com/usa/pennsylvania/philadelphia/
+Parades
+Large gatherings
+City events
+
+BOSTON
+Dorchester Heights
+https://www.nps.gov/bost/learn/photosmultimedia/webcams.htm
+Downtown skyline
+Seaport visibility
+
+ATLANTA
+Centennial Olympic Park
+https://www.earthcam.com/usa/georgia/atlanta/
+Official gathering area
+Events and concerts
+
+TORONTO
+All City of Toronto cams below are street-level JPEG stills (same pattern as venues.ts):
+https://opendata.toronto.ca/transportation/tmc/rescucameraimages/CameraImages/loc####.jpg
+Open data, 336 cams, refreshes ~1/min, attribution "City of Toronto"
+
+-- Fan walk to BMO Field (Toronto Stadium, Exhibition Place) --
+
+Strachan Ave @ Fleet St / Manitoba Dr (loc8175)
+https://opendata.toronto.ca/transportation/tmc/rescucameraimages/CameraImages/loc8175.jpg
+Princes' Gates east entrance to Exhibition Place
+THE fan walk shot - crosswalks, pedestrians, verified live
+
+Strachan Ave @ East Liberty St (loc8255)
+https://opendata.toronto.ca/transportation/tmc/rescucameraimages/CameraImages/loc8255.jpg
+Liberty Village -> Exhibition GO -> stadium walking corridor
+Fans in jerseys visible on sidewalk when verified (Jun 11, 2026)
+
+British Columbia Rd @ Saskatchewan Rd (loc8241)
+https://opendata.toronto.ca/transportation/tmc/rescucameraimages/CameraImages/loc8241.jpg
+INSIDE Exhibition Place grounds, on the road BMO Field sits on
+Closest cam to the stadium itself
+
+British Columbia Rd @ Yukon Pl (loc8252)
+https://opendata.toronto.ca/transportation/tmc/rescucameraimages/CameraImages/loc8252.jpg
+Also inside Exhibition Place, second angle near stadium
+
+Lake Shore Blvd W @ Strachan Ave / Remembrance Dr (loc9334)
+https://opendata.toronto.ca/transportation/tmc/rescucameraimages/CameraImages/loc9334.jpg
+South approach below the Princes' Gates
+
+Dufferin St @ Liberty St (loc8261)
+https://opendata.toronto.ca/transportation/tmc/rescucameraimages/CameraImages/loc8261.jpg
+Dufferin Gate west entrance approach
+WAS "Image Unavailable" on Jun 11 2026 - recheck before using
+
+-- FIFA Fan Festival (Fort York & The Bentway, Jun 11 - Jul 19) --
+
+Bathurst St @ Fort York Blvd (loc8105)
+https://opendata.toronto.ca/transportation/tmc/rescucameraimages/CameraImages/loc8105.jpg
+Main entrance corner of Fort York / The Bentway
+511 Bathurst streetcar drops festival crowds here, verified live
+
+Bathurst St @ Fleet St / Lake Shore (loc9331)
+https://opendata.toronto.ca/transportation/tmc/rescucameraimages/CameraImages/loc9331.jpg
+Southeast corner of Fort York grounds, streetcar + pedestrians
+
+-- Public watch parties downtown --
+
+Yonge St @ Dundas St (loc8032)
+https://opendata.toronto.ca/transportation/tmc/rescucameraimages/CameraImages/loc8032.jpg
+Sankofa Square (ex Yonge-Dundas Square), scramble crossing
+Toronto's Times Square - big-screen watch party central, verified live
+
+York St @ Bremner Blvd / Raptors Way (loc8001)
+https://opendata.toronto.ca/transportation/tmc/rescucameraimages/CameraImages/loc8001.jpg
+Maple Leaf Square "Jurassic Park" outside Scotiabank Arena
+Famous outdoor watch party site
+WAS "Image Unavailable" on Jun 11 2026 - recheck before using
+
+Bay St @ Queen St W (loc8113, also loc8114)
+https://opendata.toronto.ca/transportation/tmc/rescucameraimages/CameraImages/loc8113.jpg
+Corner of Nathan Phillips Square / City Hall
+
+Front St W @ Blue Jays Way (loc8264)
+https://opendata.toronto.ca/transportation/tmc/rescucameraimages/CameraImages/loc8264.jpg
+Rogers Centre / CN Tower base, heavy pedestrian zone
+
+-- Non-traffic cams --
+
+NOTE on refresh rate: city stills regenerate ~1/min at best and can stall
+for an hour+ (verified frozen frame evening of Jun 11). Can't poll faster.
+For motion, use the video embeds below (ON THE SITE as kind "embed").
+
+Toronto Downtown Skyline 4K (LIVE VIDEO, on site)
+https://www.youtube.com/embed/live_stream?channel=UC28IT4ghbKO988OzkIfRCbw
+TorontoLive4k 24/7 YouTube stream, CN Tower + Lake Ontario
+Embedded by channel id so it survives stream restarts
+
+CN Tower & Spadina (LIVE VIDEO, on site)
+https://www.youtube.com/embed/live_stream?channel=UCuUtTm7v20_S-qIx5G8P_gg
+TorontoCNTowerLive 24/7 YouTube stream
+Skyline + Spadina/Gardiner foreground
+
+Yonge-Dundas street-level LIVE VIDEO (candidate, currently offline)
+https://www.youtube.com/watch?v=cAAxuiBXPC8
+"Ugly And Traveling" channel streams Yonge-Dundas at street level
+Was offline when checked Jun 11 2026 - only street-level video found, recheck
+
+CN Tower EarthCam
+https://www.earthcam.com/world/canada/toronto/cntower/
+Rotating panoramic video of downtown + waterfront from the tower
+Video stream only, no JPEG still - embed/link, can't proxy like the others
+
+Toronto City Hall / Nathan Phillips Square (aggregators)
+https://wxyzwebcams.com/en/webcam-5026.php
+Aggregator views of Nathan Phillips Square
+Underlying feeds are mostly the City of Toronto cams above
