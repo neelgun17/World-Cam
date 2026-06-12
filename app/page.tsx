@@ -87,7 +87,13 @@ export default function Home() {
           <a href="https://gardencam.wttdotm.com/" className="underline">
             GardenCam
           </a>{" "}
-          by @wttdotm.
+          by @wttdotm · built by{" "}
+          <a
+            href="https://www.neelgundlapally.com/?ref=worldcup-fancam"
+            className="underline"
+          >
+            Neel
+          </a>
         </p>
       </footer>
     </>
