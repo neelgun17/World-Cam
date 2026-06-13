@@ -141,12 +141,12 @@ for an hour+ (verified frozen frame evening of Jun 11). Can't poll faster.
 For motion, use the video embeds below (ON THE SITE as kind "embed").
 
 Toronto Downtown Skyline 4K (LIVE VIDEO, on site)
-https://www.youtube.com/embed/live_stream?channel=UC28IT4ghbKO988OzkIfRCbw
+ON SITE via /api/yt-live/ resolver, channel UC28IT4ghbKO988OzkIfRCbw
 TorontoLive4k 24/7 YouTube stream, CN Tower + Lake Ontario
 Embedded by channel id so it survives stream restarts
 
 CN Tower & Spadina (LIVE VIDEO, on site)
-https://www.youtube.com/embed/live_stream?channel=UCuUtTm7v20_S-qIx5G8P_gg
+ON SITE via /api/yt-live/ resolver, channel UCuUtTm7v20_S-qIx5G8P_gg
 TorontoCNTowerLive 24/7 YouTube stream
 Skyline + Spadina/Gardiner foreground
 
@@ -173,7 +173,7 @@ The freeway exit for the Fan Festival at the Coliseum
 Caltrans D7; sibling cams: 177 (MLK mainline), 820 (MLK on-ramp still)
 
 Venice Beach Boardwalk (LIVE VIDEO)
-https://www.youtube.com/embed/live_stream?channel=UCJefXtw4TX35_4Nt-HJcINw
+ON SITE via /api/yt-live/ resolver, channel UCJefXtw4TX35_4Nt-HJcINw
 "Ready When You're Ready" - runs North + South boardwalk concurrently,
 channel embed picks one arbitrarily (both are Venice, acceptable)
 Alt 24/7 Venice cam: Teleport.camera Venice V Hotel, video EO_1LWqsCNE
@@ -184,14 +184,14 @@ explore.org - pinned by VIDEO id (channel runs many cams worldwide,
 channel embed would resolve arbitrarily). May die on stream restart.
 
 LA Street Walk / SoFi match days (LIVE VIDEO)
-https://www.youtube.com/embed/live_stream?channel=UChj9oix5HdyeuGl2DftUiQQ
+ON SITE via /api/yt-live/ resolver, channel UChj9oix5HdyeuGl2DftUiQQ
 "WALKING IN LA" - roving IRL walker. Hollywood Blvd most days; streams
 the SoFi fan scene on World Cup match days (verified live at
 "FIFA World Cup USA vs Paraguay at SoFi" Jun 12 2026)
 Offline panel between streams - expected
 
 DTLA Skyline (LIVE VIDEO)
-https://www.youtube.com/embed/live_stream?channel=UCuGJHbJLvVW2JqKNzhBSu6g
+ON SITE via /api/yt-live/ resolver, channel UCuGJHbJLvVW2JqKNzhBSu6g
 "DTLA Live Feed" - was running a WORLD CUP EDITION stream Jun 12
 
 -- Candidates not on the site --

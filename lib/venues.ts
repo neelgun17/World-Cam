@@ -161,8 +161,9 @@ export const VENUES: Venue[] = [
     // not on any camera. Caltrans registry:
     // cwwp2.dot.ca.gov/data/d7/cctv/cctvStatusD07.json (static .jpg + an HLS
     // stream at wzmedia.dot.ca.gov/D7/CCTV-<index>.stream/playlist.m3u8).
-    // YouTube embeds use channel id where one channel = one location (survives
-    // stream restarts); explore.org's Santa Monica cam is pinned by video id.
+    // Channel-based YouTube embeds go through /api/yt-live/<channelId>, which
+    // resolves the channel's current live video server-side (survives stream
+    // restarts); explore.org's Santa Monica cam is pinned by video id.
     cameras: [
       {
         id: "los-angeles-i105-prairie-ave",
@@ -208,7 +209,7 @@ export const VENUES: Venue[] = [
         // Venice angles, so that's fine. Another 24/7 Venice option if this
         // channel dies: Teleport.camera's Venice V Hotel cam (EO_1LWqsCNE).
         sourceUrl:
-          "https://www.youtube.com/embed/live_stream?channel=UCJefXtw4TX35_4Nt-HJcINw",
+          "/api/yt-live/UCJefXtw4TX35_4Nt-HJcINw",
         kind: "embed",
         proxy: false,
         attribution: "Venice Beach Cam (YouTube)",
@@ -233,7 +234,7 @@ export const VENUES: Venue[] = [
         name: "LA Street Walk (live video)",
         location: "Roving street-level walk — Hollywood Blvd most days, SoFi Stadium fan scene on match days",
         sourceUrl:
-          "https://www.youtube.com/embed/live_stream?channel=UChj9oix5HdyeuGl2DftUiQQ",
+          "/api/yt-live/UChj9oix5HdyeuGl2DftUiQQ",
         kind: "embed",
         proxy: false,
         attribution: "Walking in LA (YouTube)",
@@ -243,7 +244,7 @@ export const VENUES: Venue[] = [
         name: "Downtown LA Skyline (live video)",
         location: "DTLA skyline from Long Beach Harbor to the Hollywood Hills — 24/7 stream",
         sourceUrl:
-          "https://www.youtube.com/embed/live_stream?channel=UCuGJHbJLvVW2JqKNzhBSu6g",
+          "/api/yt-live/UCuGJHbJLvVW2JqKNzhBSu6g",
         kind: "embed",
         proxy: false,
         attribution: "DTLA Live Feed (YouTube)",
@@ -348,15 +349,15 @@ export const VENUES: Venue[] = [
         refreshMs: 60_000,
         attribution: "City of Toronto",
       },
-      // Real video: 24/7 YouTube streams, embedded by channel id
-      // (/embed/live_stream?channel=...) so the link survives stream restarts.
+      // Real video: 24/7 YouTube streams, resolved per-request by
+      // /api/yt-live/<channelId> so tiles survive stream restarts.
       // Third-party streams — they can occasionally go offline.
       {
         id: "toronto-skyline-live",
         name: "Downtown Skyline (live video)",
         location: "CN Tower & Lake Ontario skyline — 24/7 stream",
         sourceUrl:
-          "https://www.youtube.com/embed/live_stream?channel=UC28IT4ghbKO988OzkIfRCbw",
+          "/api/yt-live/UC28IT4ghbKO988OzkIfRCbw",
         kind: "embed",
         proxy: false,
         attribution: "TorontoLive4k (YouTube)",
@@ -366,7 +367,7 @@ export const VENUES: Venue[] = [
         name: "CN Tower & Spadina (live video)",
         location: "CN Tower over Spadina Ave & Gardiner — 24/7 stream",
         sourceUrl:
-          "https://www.youtube.com/embed/live_stream?channel=UCuUtTm7v20_S-qIx5G8P_gg",
+          "/api/yt-live/UCuUtTm7v20_S-qIx5G8P_gg",
         kind: "embed",
         proxy: false,
         attribution: "TorontoCNTowerLive (YouTube)",

@@ -18,6 +18,7 @@ lib/espn.ts                   ← scoreboard fetch + parsing
 app/page.tsx                  ← venue index (auto-generated from registry)
 app/[venueSlug]/page.tsx      ← one venue's cam page (works for any entry)
 app/api/cam/[camId]/route.ts  ← image proxy for hotlink-blocking sources
+app/api/yt-live/[channelId]/  ← resolves a channel's live video, 302 to embed
 app/api/matches/route.ts      ← scores endpoint, 60s-cached
 components/                   ← CamGrid, CamTile, ScoreBar, MatchDayBanner
 ```
@@ -91,8 +92,10 @@ Each event includes `competitions[0].venue.fullName`, which is matched against
   511PA (Philly), KC Scout (KC), Ontario 511 (Toronto), DriveBC (Vancouver).
 
 Prefer JPEG-still cams. For real video, `kind: "embed"` renders the sourceUrl
-in an iframe — used for 24/7 YouTube live streams, embedded by channel id
-(`/embed/live_stream?channel=...`) so links survive stream restarts. If a
+in an iframe — used for 24/7 YouTube live streams. Channel-based cams point at
+`/api/yt-live/<channelId>`, which resolves the channel's current live video
+server-side and 302s to its embed (YouTube's own `live_stream?channel=`
+endpoint is unreliable and stream ids rotate on restart). If a
 source only offers HLS video (`.m3u8`), set `kind: "hls"` (`proxy: false`):
 CamTile plays it via [hls.js](https://github.com/video-dev/hls.js), lazy-loaded
 on the client only when an HLS tile mounts (Safari/iOS use native HLS). The
