@@ -33,7 +33,7 @@ components/                   ← CamGrid, CamTile, ScoreBar, MatchDayBanner
 | Mercedes-Benz Stadium (Atlanta) | Northside Dr & Centennial Park Dr @ MLK | GDOT / 511GA |
 | Hard Rock Stadium (Miami) | Turnpike @ Miami Gardens Dr, University @ Miramar | FDOT / FL511 |
 | Lincoln Financial Field (Philly) | I-95 @ Broad St & MM 17.4 | PennDOT / 511PA |
-| SoFi Stadium (LA) | I-105 @ Prairie, I-405 @ Century | Caltrans D7 |
+| SoFi Stadium (LA) | Prairie still + Manchester & Exposition (Fan Festival exit) live HLS, Venice & Santa Monica boardwalks, roving SoFi match-day walk, DTLA skyline | Caltrans D7, YouTube |
 | Levi's Stadium (Bay Area) | SR-237 @ Lafayette & North First | Caltrans D4 |
 | Lumen Field (Seattle) | I-5 @ Dearborn & Judkins | WSDOT |
 | NRG Stadium (Houston) | I-610 South Loop @ Kirby & Fannin | Houston TranStar |

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Anton, Oswald } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
 // Display face for headings; condensed sans for everything else.
@@ -32,6 +33,7 @@ export default function RootLayout({
     >
       <body className="flex min-h-full flex-col bg-paper text-ink">
         {children}
+        <Analytics />
       </body>
     </html>
   );

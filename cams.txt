@@ -155,6 +155,64 @@ https://www.youtube.com/watch?v=cAAxuiBXPC8
 "Ugly And Traveling" channel streams Yonge-Dundas at street level
 Was offline when checked Jun 11 2026 - only street-level video found, recheck
 
+LOS_ANGELES (researched Jun 12 2026)
+
+Constraints: LA has NO public street-cam network. LADOT ATSAC is private,
+trafficinfo.lacity.org is dead (timeout). Inglewood publishes nothing.
+The SoFi "fan walk" is shuttle-based: Metro K/C -> Downtown Inglewood
+station -> free Stadium Express shuttle to Lot S (Arbor Vitae/District Dr)
+-> 5-10 min walk. None of it on camera.
+FIFA Fan Festival: LA Memorial Coliseum, Exposition Park (Figueroa &
+Exposition). Metro E Line stops Expo Park/USC and Expo/Vermont adjacent.
+
+-- On the site --
+
+I-110 @ Exposition Blvd (LIVE VIDEO, 1080p HLS)
+https://wzmedia.dot.ca.gov/D7/CCTV-178.stream/playlist.m3u8
+The freeway exit for the Fan Festival at the Coliseum
+Caltrans D7; sibling cams: 177 (MLK mainline), 820 (MLK on-ramp still)
+
+Venice Beach Boardwalk (LIVE VIDEO)
+https://www.youtube.com/embed/live_stream?channel=UCJefXtw4TX35_4Nt-HJcINw
+"Ready When You're Ready" - runs North + South boardwalk concurrently,
+channel embed picks one arbitrarily (both are Venice, acceptable)
+Alt 24/7 Venice cam: Teleport.camera Venice V Hotel, video EO_1LWqsCNE
+
+Santa Monica Pier & Beach (LIVE VIDEO)
+https://www.youtube.com/embed/v97JpT3ZA0w
+explore.org - pinned by VIDEO id (channel runs many cams worldwide,
+channel embed would resolve arbitrarily). May die on stream restart.
+
+LA Street Walk / SoFi match days (LIVE VIDEO)
+https://www.youtube.com/embed/live_stream?channel=UChj9oix5HdyeuGl2DftUiQQ
+"WALKING IN LA" - roving IRL walker. Hollywood Blvd most days; streams
+the SoFi fan scene on World Cup match days (verified live at
+"FIFA World Cup USA vs Paraguay at SoFi" Jun 12 2026)
+Offline panel between streams - expected
+
+DTLA Skyline (LIVE VIDEO)
+https://www.youtube.com/embed/live_stream?channel=UCuGJHbJLvVW2JqKNzhBSu6g
+"DTLA Live Feed" - was running a WORLD CUP EDITION stream Jun 12
+
+-- Candidates not on the site --
+
+EarthCam Hollywood Blvd
+https://www.earthcam.com/usa/california/losangeles/hollywoodblvd/
+Street-level Walk of Fame / Chinese Theatre pedestrian view
+EarthCam player only - not embeddable without their paid embed
+
+Pac Park Santa Monica Pier cams
+https://pacpark.com/santa-monica-pier-live-cams/
+Page blocks scraping (403) - recheck manually in a browser
+
+Hermosa Beach Strand cam
+https://www.youtube.com/watch?v=Jwna-J3L0NM
+"Good Stuff Restaurants" - beach boardwalk crowds, was live Jun 12
+
+Caltrans D7 registry (all LA freeway cams, ~jpg + HLS pairs)
+https://cwwp2.dot.ca.gov/data/d7/cctv/cctvStatusD07.json
+HLS pattern: https://wzmedia.dot.ca.gov/D7/CCTV-<index>.stream/playlist.m3u8
+
 CN Tower EarthCam
 https://www.earthcam.com/world/canada/toronto/cntower/
 Rotating panoramic video of downtown + waterfront from the tower

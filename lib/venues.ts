@@ -148,11 +148,26 @@ export const VENUES: Venue[] = [
     city: "Inglewood, CA",
     timezone: "America/Los_Angeles",
     espnVenueNames: ["SoFi"],
+    // Caltrans D7 is freeway-only here — unlike Toronto's open-data network,
+    // LA has no hotlinkable pedestrian/street cams (LADOT ATSAC isn't public;
+    // trafficinfo.lacity.org is dead). Six traffic stills would just be six
+    // identical freeways, so we anchor on the Caltrans cams that actually mean
+    // something — Prairie (the stadium's east edge), Manchester (live video on
+    // the main approach), and Exposition (live video at the exit for the FIFA
+    // Fan Festival at the LA Memorial Coliseum) — and fill the rest with 24/7
+    // YouTube streams of where LA fans actually gather: Venice, Santa Monica,
+    // a roving street walk, and the DTLA skyline. The SoFi "fan walk" itself
+    // is shuttle-based (Metro K/C → Downtown Inglewood → shuttle to Lot S) and
+    // not on any camera. Caltrans registry:
+    // cwwp2.dot.ca.gov/data/d7/cctv/cctvStatusD07.json (static .jpg + an HLS
+    // stream at wzmedia.dot.ca.gov/D7/CCTV-<index>.stream/playlist.m3u8).
+    // YouTube embeds use channel id where one channel = one location (survives
+    // stream restarts); explore.org's Santa Monica cam is pinned by video id.
     cameras: [
       {
         id: "los-angeles-i105-prairie-ave",
         name: "I-105 at Prairie Ave Off-Ramp",
-        location: "I-105 EB at Prairie Ave off-ramp, Inglewood, CA",
+        location: "I-105 EB at Prairie Ave off-ramp — Prairie runs the east edge of SoFi/Hollywood Park, Inglewood, CA",
         sourceUrl:
           "https://cwwp2.dot.ca.gov/data/d7/cctv/image/i105848prairieaveofframp/i105848prairieaveofframp.jpg",
         kind: "jpeg",
@@ -161,15 +176,77 @@ export const VENUES: Venue[] = [
         attribution: "Caltrans D7",
       },
       {
-        id: "los-angeles-i405-century-blvd",
-        name: "I-405 at WB Century Blvd On-Ramp",
-        location: "I-405 at Century Blvd westbound on-ramp, Inglewood, CA",
+        id: "los-angeles-i405-manchester-blvd",
+        name: "I-405 at Manchester Blvd On-Ramp (live video)",
+        location: "I-405 at Manchester Blvd — the main arterial into the SoFi / Hollywood Park district, Inglewood, CA",
+        // HLS live video (hls.js, played client-side) rather than a polled still.
         sourceUrl:
-          "https://cwwp2.dot.ca.gov/data/d7/cctv/image/i405869wbcenturyblvdonramp/i405869wbcenturyblvdonramp.jpg",
-        kind: "jpeg",
-        proxy: true,
-        refreshMs: 60_000,
+          "https://wzmedia.dot.ca.gov/D7/CCTV-872.stream/playlist.m3u8",
+        kind: "hls",
+        proxy: false,
         attribution: "Caltrans D7",
+      },
+      {
+        id: "los-angeles-i110-exposition-blvd",
+        name: "I-110 at Exposition Blvd (live video)",
+        location: "I-110 at Exposition Blvd by USC — the exit for the FIFA Fan Festival at the LA Memorial Coliseum",
+        // 1080p HLS at the official Fan Festival's freeway exit.
+        sourceUrl:
+          "https://wzmedia.dot.ca.gov/D7/CCTV-178.stream/playlist.m3u8",
+        kind: "hls",
+        proxy: false,
+        attribution: "Caltrans D7",
+      },
+      // 24/7 YouTube streams of LA's fan-gathering spots — actual crowds and
+      // street life, not freeways. Third-party, so they can go offline.
+      {
+        id: "los-angeles-venice-beach-live",
+        name: "Venice Beach Boardwalk (live video)",
+        location: "Venice Beach boardwalk — skaters, street performers & ocean crowds, 24/7 stream",
+        // This channel runs two concurrent streams (North + South boardwalk),
+        // so the channel embed resolves to one of them arbitrarily — both are
+        // Venice angles, so that's fine. Another 24/7 Venice option if this
+        // channel dies: Teleport.camera's Venice V Hotel cam (EO_1LWqsCNE).
+        sourceUrl:
+          "https://www.youtube.com/embed/live_stream?channel=UCJefXtw4TX35_4Nt-HJcINw",
+        kind: "embed",
+        proxy: false,
+        attribution: "Venice Beach Cam (YouTube)",
+      },
+      {
+        id: "los-angeles-santa-monica-pier-live",
+        name: "Santa Monica Pier & Beach (live video)",
+        location: "Santa Monica Pier and beach — Pacific Park, the boardwalk & the ocean, 24/7 stream",
+        // explore.org runs many cams on one channel, so pin the exact video.
+        sourceUrl: "https://www.youtube.com/embed/v97JpT3ZA0w",
+        kind: "embed",
+        proxy: false,
+        attribution: "explore.org (YouTube)",
+      },
+      // Roving IRL walker, not a fixed cam: Hollywood Blvd most days, but on
+      // World Cup match days they stream the fan scene at SoFi itself (live at
+      // "FIFA World Cup USA vs Paraguay at SoFi" when verified Jun 12 2026).
+      // Channel embed resolves to whatever they're walking now; shows
+      // YouTube's offline panel between streams.
+      {
+        id: "los-angeles-street-walk-live",
+        name: "LA Street Walk (live video)",
+        location: "Roving street-level walk — Hollywood Blvd most days, SoFi Stadium fan scene on match days",
+        sourceUrl:
+          "https://www.youtube.com/embed/live_stream?channel=UChj9oix5HdyeuGl2DftUiQQ",
+        kind: "embed",
+        proxy: false,
+        attribution: "Walking in LA (YouTube)",
+      },
+      {
+        id: "los-angeles-dtla-skyline-live",
+        name: "Downtown LA Skyline (live video)",
+        location: "DTLA skyline from Long Beach Harbor to the Hollywood Hills — 24/7 stream",
+        sourceUrl:
+          "https://www.youtube.com/embed/live_stream?channel=UCuGJHbJLvVW2JqKNzhBSu6g",
+        kind: "embed",
+        proxy: false,
+        attribution: "DTLA Live Feed (YouTube)",
       },
     ],
   },
